@@ -7,18 +7,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.shonenapp.navigation.Screen.*
+import com.example.shonenapp.presentation.splash.ShonenSplashScreen
 import com.example.shonenapp.utils.Constant.DETAIL_ID
 
 @Composable
 fun SetupNavGraph(navHostController: NavHostController) {
-    NavHost(startDestination = SplashScreen.route, navController = navHostController) {
-        composable(SplashScreen.route) {
+    NavHost(startDestination = Splash.route, navController = navHostController) {
+        composable(Splash.route) {
+            ShonenSplashScreen(navHostController)
+        }
+        composable(Welcome.route) {
 
         }
-        composable(WelcomeScreen.route) {
-
-        }
-        composable(HomeScreen.route) {
+        composable(Home.route) {
 
         }
         composable(Details.route, arguments = listOf(navArgument(DETAIL_ID) {
