@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ShonenApp</string>
+    <string name="on_boarding_image">on_boarding_image</string>
 </resources>
