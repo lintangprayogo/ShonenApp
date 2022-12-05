@@ -2,7 +2,11 @@ package com.example.shonenapp.di
 
 import android.content.Context
 import com.example.shonenapp.data.repository.DataStoreOperationImpl
+import com.example.shonenapp.data.repository.Repository
 import com.example.shonenapp.domain.respository.DataStoreOperation
+import com.example.shonenapp.domain.use_case.UseCases
+import com.example.shonenapp.domain.use_case.get_onboarding_use_case.GetOnboardingUseCase
+import com.example.shonenapp.domain.use_case.save_onboarding_use_case.SaveOnboardingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +22,14 @@ object RepoModule {
     @Provides
     fun provideDataStore(@ApplicationContext context: Context): DataStoreOperation {
         return DataStoreOperationImpl(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUseCase(repository: Repository): UseCases {
+       return UseCases(
+            getOnboardingUseCase = GetOnboardingUseCase(repository = repository),
+            saveOnboardingUseCase = SaveOnboardingUseCase(repository = repository)
+        )
     }
 }
