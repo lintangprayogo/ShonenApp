@@ -1,4 +1,4 @@
-package com.example.shonenapp.data.pref
+package com.example.shonenapp.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore

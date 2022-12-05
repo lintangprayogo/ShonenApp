@@ -1,7 +1,7 @@
 package com.example.shonenapp.di
 
 import android.content.Context
-import com.example.shonenapp.data.pref.DataStoreOperationImpl
+import com.example.shonenapp.data.repository.DataStoreOperationImpl
 import com.example.shonenapp.domain.respository.DataStoreOperation
 import dagger.Module
 import dagger.Provides
