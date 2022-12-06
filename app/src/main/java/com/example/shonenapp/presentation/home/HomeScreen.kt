@@ -1,9 +1,17 @@
 package com.example.shonenapp.presentation.home
 
-import androidx.compose.material.Text
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 
 @Composable
-fun HomeScreen(){
-    Text(text = "Heloo")
+fun HomeScreen() {
+    Scaffold(
+        topBar = {
+            HomeTopBar {
+
+            }
+        },
+    ) {
+        it.calculateBottomPadding()
+    }
 }
