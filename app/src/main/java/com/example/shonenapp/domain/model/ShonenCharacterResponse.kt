@@ -1,4 +1,4 @@
-package com.example.shonenapp.domain.model
+package com.example.models
 
 import kotlinx.serialization.Serializable
 
