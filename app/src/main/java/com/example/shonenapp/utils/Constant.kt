@@ -7,4 +7,5 @@ object Constant {
     const val SHONEN_CHARACTER_REMOTE_KEY_TABLE = "ShonenCharacterRemoteKey"
     const val SHONEN_PREF = "SHONEN_PREF"
     const val ONBOARDING_COMPLETED = "ONBOARDING_COMPLETED"
+    const val BASE_URL = "http://10.0.2.2:8080"
 }
