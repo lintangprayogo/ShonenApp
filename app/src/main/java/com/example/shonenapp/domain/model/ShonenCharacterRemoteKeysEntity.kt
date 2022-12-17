@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 import com.example.shonenapp.utils.Constant.SHONEN_CHARACTER_REMOTE_KEY_TABLE
 
 @Entity(tableName =  SHONEN_CHARACTER_REMOTE_KEY_TABLE)
-data class ShonenCharacterRemoteKeyEntity(
+data class ShonenCharacterRemoteKeysEntity(
     @PrimaryKey(autoGenerate = false)
-    val id:Int,
+    val id:Long,
     val prevPage:Int?,
     val nextPage:Int?,
 )

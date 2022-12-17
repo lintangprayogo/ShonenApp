@@ -18,7 +18,7 @@ interface CharacterDao {
     suspend fun getCharacterById(id: Long): ShonenCharacterEntry
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllCharacter(list: ShonenCharacterEntity)
+    suspend fun insertAllCharacter(list: List<ShonenCharacterEntity>)
 
 
     @Query("DELETE FROM ShonenCharacter")

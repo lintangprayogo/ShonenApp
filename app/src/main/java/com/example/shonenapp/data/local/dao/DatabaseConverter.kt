@@ -1,4 +1,4 @@
-package com.example.shonenapp.data.local
+package com.example.shonenapp.data.local.dao
 
 import androidx.room.TypeConverter
 
