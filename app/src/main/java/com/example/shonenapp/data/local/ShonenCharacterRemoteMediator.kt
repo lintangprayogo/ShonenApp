@@ -35,14 +35,14 @@ class ShonenCharacterRemoteMediator @Inject constructor(
                 LoadType.PREPEND -> {
                     val remoteKeys = getRemoteKeysForFirstime(state)
                     val prevPage = remoteKeys?.prevPage ?: return MediatorResult.Success(
-                        endOfPaginationReached = remoteKeys == null
+                        endOfPaginationReached = remoteKeys != null
                     )
                     prevPage
                 }
                 LoadType.APPEND -> {
                     val remoteKeys = getRemoteKeysForLastItem(state)
                     val nextPage = remoteKeys?.nextPage ?: return MediatorResult.Success(
-                        endOfPaginationReached = remoteKeys == null
+                        endOfPaginationReached = remoteKeys != null
                     )
                     nextPage
                 }
@@ -95,7 +95,7 @@ class ShonenCharacterRemoteMediator @Inject constructor(
 
     private suspend fun getClosestRemoteKeyToCurentPosition(state: PagingState<Int, ShonenCharacterResponse>): ShonenCharacterRemoteKeysEntry? {
         return state.anchorPosition?.let { pos ->
-            state.closestItemToPosition(pos)?.id?.let {id->
+            state.closestItemToPosition(pos)?.id?.let { id ->
                 remoteKeyDao.getRemoteKey(id)
             }
         }
