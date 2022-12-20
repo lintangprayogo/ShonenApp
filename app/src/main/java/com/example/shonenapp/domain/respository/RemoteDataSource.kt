@@ -5,6 +5,6 @@ import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
-    fun getAllData(): Flow<PagingData<ShonenCharacterEntry>>
-    fun searchHero(query: String): Flow<PagingData<ShonenCharacterEntry>>
+    fun getAllCharacter(): Flow<PagingData<ShonenCharacterEntry>>
+    fun searchCharacter(query: String): Flow<PagingData<ShonenCharacterEntry>>
 }

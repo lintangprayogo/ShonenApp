@@ -1,5 +1,7 @@
 package com.example.shonenapp.data.repository
 
+import androidx.paging.PagingData
+import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.domain.respository.DataStoreOperation
 import com.example.shonenapp.domain.respository.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -16,4 +18,8 @@ class Repository @Inject constructor(
 
     fun getOnBoardingState(): Flow<Boolean> = dataStore.getOnBoardingState()
 
+
+    fun getAllCharacter(): Flow<PagingData<ShonenCharacterEntry>> = remoteDataSource.getAllCharacter()
+
+    fun searchCharacter(query: String): Flow<PagingData<ShonenCharacterEntry>> = remoteDataSource.searchCharacter(query)
 }

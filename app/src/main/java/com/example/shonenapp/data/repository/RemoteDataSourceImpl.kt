@@ -18,7 +18,7 @@ class RemoteDataSourceImpl(
 ) : RemoteDataSource {
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun getAllData(): Flow<PagingData<ShonenCharacterEntry>> {
+    override fun getAllCharacter(): Flow<PagingData<ShonenCharacterEntry>> {
         val pagingSourceFactory = { shonenDataBase.characterDao().getAllCharacter() }
         return Pager(
             config = PagingConfig(pageSize = ITEM_PER_PAGE),
@@ -31,7 +31,7 @@ class RemoteDataSourceImpl(
 
     }
 
-    override fun searchHero(query: String): Flow<PagingData<ShonenCharacterEntry>> {
+    override fun searchCharacter(query: String): Flow<PagingData<ShonenCharacterEntry>> {
         TODO("Not yet implemented")
     }
 
