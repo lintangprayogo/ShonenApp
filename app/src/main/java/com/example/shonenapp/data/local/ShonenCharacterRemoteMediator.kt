@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class ShonenCharacterRemoteMediator @Inject constructor(
-    val shonenApiService: ShonenApiService,
-    val shonenDataBase: ShonenDataBase
+    private val shonenApiService: ShonenApiService,
+    private val shonenDataBase: ShonenDataBase
 ) : RemoteMediator<Int, ShonenCharacterResponse>() {
 
     private val characterDao = shonenDataBase.characterDao()
@@ -33,14 +33,14 @@ class ShonenCharacterRemoteMediator @Inject constructor(
                     remoteKeys?.nextPage?.minus(1) ?: 1
                 }
                 LoadType.PREPEND -> {
-                    val remoteKeys = getClosestRemoteKeyToCurentPosition(state)
+                    val remoteKeys = getRemoteKeysForFirstime(state)
                     val prevPage = remoteKeys?.prevPage ?: return MediatorResult.Success(
                         endOfPaginationReached = remoteKeys == null
                     )
                     prevPage
                 }
                 LoadType.APPEND -> {
-                    val remoteKeys = getClosestRemoteKeyToCurentPosition(state)
+                    val remoteKeys = getRemoteKeysForLastItem(state)
                     val nextPage = remoteKeys?.nextPage ?: return MediatorResult.Success(
                         endOfPaginationReached = remoteKeys == null
                     )
@@ -95,13 +95,13 @@ class ShonenCharacterRemoteMediator @Inject constructor(
 
     private suspend fun getClosestRemoteKeyToCurentPosition(state: PagingState<Int, ShonenCharacterResponse>): ShonenCharacterRemoteKeysEntry? {
         return state.anchorPosition?.let { pos ->
-            state.closestItemToPosition(pos)?.id?.let {
-                remoteKeyDao.getRemoteKey(it)
+            state.closestItemToPosition(pos)?.id?.let {id->
+                remoteKeyDao.getRemoteKey(id)
             }
         }
     }
 
-    private suspend fun getRemoteKeysForFisrtime(state: PagingState<Int, ShonenCharacterResponse>): ShonenCharacterRemoteKeysEntry? {
+    private suspend fun getRemoteKeysForFirstime(state: PagingState<Int, ShonenCharacterResponse>): ShonenCharacterRemoteKeysEntry? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { character ->
                 remoteKeyDao.getRemoteKey(character.id)
@@ -109,7 +109,7 @@ class ShonenCharacterRemoteMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeysForLastItem(state: PagingState<Int, ShonenCharacterResponse>): ShonenCharacterRemoteKeysEntry? {
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { character ->
                 remoteKeyDao.getRemoteKey(character.id)
             }

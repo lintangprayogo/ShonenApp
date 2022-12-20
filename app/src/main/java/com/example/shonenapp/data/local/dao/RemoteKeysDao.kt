@@ -9,8 +9,8 @@ import com.example.shonenapp.domain.model.ShonenCharacterRemoteKeysEntry
 
 @Dao
 interface RemoteKeysDao {
-    @Query("SELECT * FROM ShonenCharacterRemoteKeys where id =:id")
-    suspend fun getRemoteKey(id:Long):ShonenCharacterRemoteKeysEntry?
+    @Query("SELECT * FROM ShonenCharacterRemoteKeys where id =:characterId")
+    suspend fun getRemoteKey(characterId:Long):ShonenCharacterRemoteKeysEntry?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRemoteKey(remoteKeyEntity: List<ShonenCharacterRemoteKeysEntity>)
