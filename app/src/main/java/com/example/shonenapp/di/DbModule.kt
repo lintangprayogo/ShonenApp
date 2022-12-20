@@ -2,7 +2,6 @@ package com.example.shonenapp.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.shonenapp.data.local.dao.ShonenDataBase
 import com.example.shonenapp.utils.Constant.SHONEN_CHARACTER_DB
 import dagger.Module
@@ -18,7 +17,7 @@ object DbModule {
 
     @Singleton
     @Provides
-    fun provideDb(@ApplicationContext context: Context): RoomDatabase =
+    fun provideDb(@ApplicationContext context: Context): ShonenDataBase =
         Room.databaseBuilder(context, ShonenDataBase::class.java, SHONEN_CHARACTER_DB)
             .build()
 

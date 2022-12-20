@@ -8,4 +8,5 @@ object Constant {
     const val SHONEN_PREF = "SHONEN_PREF"
     const val ONBOARDING_COMPLETED = "ONBOARDING_COMPLETED"
     const val BASE_URL = "http://10.0.2.2:8080"
+    const val ITEM_PER_PAGE = 3
 }
