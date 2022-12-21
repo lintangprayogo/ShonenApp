@@ -2,14 +2,17 @@ package com.example.shonenapp.presentation.home
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.shonenapp.presentation.component.RatingWidget
+import com.example.shonenapp.presentation.component.ListCharacter
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel= hiltViewModel()) {
-    val  allCharacter = homeViewModel.getAllCharacter.collectAsLazyPagingItems()
+fun HomeScreen(
+    navHostController: NavHostController,
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
+    val allCharacter = homeViewModel.getAllCharacter.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
             HomeTopBar {
@@ -17,7 +20,7 @@ fun HomeScreen(homeViewModel: HomeViewModel= hiltViewModel()) {
             }
         },
     ) {
-        RatingWidget(modifier = Modifier, rating = 4.5)
+        ListCharacter(allCharacter, navHostController = navHostController)
         it.calculateBottomPadding()
     }
 }

@@ -22,7 +22,7 @@ fun SetupNavGraph(navHostController: NavHostController) {
             WelcomeScreen(navHostController)
         }
         composable(Home.route) {
-            HomeScreen()
+            HomeScreen(navHostController)
         }
         composable(Details.route, arguments = listOf(navArgument(DETAIL_ID) {
             type = NavType.IntType

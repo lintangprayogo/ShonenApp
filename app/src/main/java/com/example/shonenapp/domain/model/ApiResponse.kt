@@ -1,5 +1,6 @@
-package com.example.models
+package com.example.shonenapp.domain.model
 
+import com.example.models.ShonenCharacterResponse
 import kotlinx.serialization.Serializable
 
 
@@ -10,4 +11,5 @@ data class ApiResponse(
     val prevPage: Int? = null,
     val nextPage: Int? = null,
     val characters: List<ShonenCharacterResponse> = emptyList(),
+    val lastUpdated:String?=null
 )
