@@ -35,12 +35,15 @@ import com.example.shonenapp.navigation.Screen
 import com.example.shonenapp.ui.theme.topAppBarContentColor
 import com.example.shonenapp.utils.Constant.BASE_URL
 
+
 @Composable
 fun ListCharacter(
     entries: LazyPagingItems<ShonenCharacterEntry>,
-    navHostController: NavHostController
+    navHostController: NavHostController,
 ) {
-    LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
+    LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING),
+        verticalArrangement =Arrangement.spacedBy( SMALL_PADDING)
+        ) {
         items(items = entries,
             key = { it.id }) { character ->
             character?.let {
