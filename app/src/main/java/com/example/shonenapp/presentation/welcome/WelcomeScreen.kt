@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.splash
+package com.example.shonenapp.presentation.welcome
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -26,7 +26,6 @@ import com.example.borutoapp.ui.theme.SMALL_PADDING
 import com.example.shonenapp.R
 import com.example.shonenapp.domain.model.OnBoardingPage
 import com.example.shonenapp.navigation.Screen
-import com.example.shonenapp.presentation.welcome.WelcomeViewModel
 import com.example.shonenapp.ui.theme.*
 import com.google.accompanist.pager.*
 

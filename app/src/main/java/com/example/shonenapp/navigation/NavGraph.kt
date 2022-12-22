@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import com.example.shonenapp.navigation.Screen.*
 import com.example.shonenapp.presentation.home.HomeScreen
 import com.example.shonenapp.presentation.splash.ShonenSplashScreen
-import com.example.shonenapp.presentation.splash.WelcomeScreen
+import com.example.shonenapp.presentation.welcome.WelcomeScreen
 import com.example.shonenapp.utils.Constant.DETAIL_ID
 
 @Composable
