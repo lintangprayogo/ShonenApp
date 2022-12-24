@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -18,13 +19,22 @@ import com.example.shonenapp.ui.theme.ShimmerMediumGray
 
 
 @Composable
+fun ShimmerEffect() {
+    LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
+        items(2) {
+            ShimmerAnimatedItem()
+        }
+    }
+}
+
+@Composable
 fun ShimmerAnimatedItem() {
     val transaction = rememberInfiniteTransition()
     val alphaAnimation = transaction.animateFloat(
         initialValue = 1f,
         targetValue = 0f,
         animationSpec = infiniteRepeatable(
-            animation  = tween(
+            animation = tween(
                 durationMillis = 500,
                 easing = FastOutLinearInEasing
             ),
@@ -67,7 +77,7 @@ fun ShimmerItem(alpha: Float) {
             }
 
             Spacer(modifier = Modifier.padding(SMALL_PADDING))
-            repeat(3){
+            repeat(3) {
                 Surface(
                     modifier = Modifier
                         .alpha(alpha)
@@ -84,10 +94,11 @@ fun ShimmerItem(alpha: Float) {
                 Spacer(modifier = Modifier.padding(EXTRA_SMALL_PADDING))
             }
 
-            Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
-                ) {
-                repeat(5){
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+            ) {
+                repeat(5) {
                     Surface(
                         modifier = Modifier
                             .alpha(alpha)
@@ -109,14 +120,14 @@ fun ShimmerItem(alpha: Float) {
 
 @Preview
 @Composable
-private fun ShimmerItemPreview(){
- ShimmerAnimatedItem()
+private fun ShimmerItemPreview() {
+    ShimmerAnimatedItem()
 }
 
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
-private fun ShimmerItemDarkPreview(){
+private fun ShimmerItemDarkPreview() {
     ShimmerAnimatedItem()
 }
 

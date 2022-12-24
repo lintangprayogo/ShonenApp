@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.AsyncImage
@@ -40,18 +41,43 @@ fun ListCharacter(
     entries: LazyPagingItems<ShonenCharacterEntry>,
     navHostController: NavHostController
 ) {
-    LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
-        items(items = entries,
-            key = { it.id }) { character ->
-            character?.let {
-                CharacterItem(
-                    character = character,
-                    navHostController = navHostController
-                )
+    val result = handlePaggingResult(entries = entries)
+    if (result) {
+        LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
+            items(items = entries,
+                key = { it.id }) { character ->
+                character?.let {
+                    CharacterItem(
+                        character = character,
+                        navHostController = navHostController
+                    )
+                }
             }
         }
     }
 
+}
+
+@Composable
+fun handlePaggingResult(entries: LazyPagingItems<ShonenCharacterEntry>): Boolean {
+    entries.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            else -> null
+        }
+
+
+        return when {
+            loadState.refresh is LoadState.Loading -> {
+                ShimmerEffect()
+                false
+            }
+            error != null -> false
+            else -> true
+        }
+    }
 }
 
 @Composable
