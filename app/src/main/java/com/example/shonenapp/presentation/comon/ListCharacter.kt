@@ -36,10 +36,11 @@ import com.example.shonenapp.navigation.Screen
 import com.example.shonenapp.ui.theme.topAppBarContentColor
 import com.example.shonenapp.utils.Constant.BASE_URL
 
+
 @Composable
 fun ListCharacter(
     entries: LazyPagingItems<ShonenCharacterEntry>,
-    navHostController: NavHostController
+    navHostController: NavHostController,
 ) {
     val result = handlePaggingResult(entries = entries)
     if (result) {
