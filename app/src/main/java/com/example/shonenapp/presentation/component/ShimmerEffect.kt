@@ -20,7 +20,10 @@ import com.example.shonenapp.ui.theme.ShimmerMediumGray
 
 @Composable
 fun ShimmerEffect() {
-    LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
+    LazyColumn(
+        contentPadding = PaddingValues(all = SMALL_PADDING),
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+    ) {
         items(2) {
             ShimmerAnimatedItem()
         }

@@ -44,7 +44,12 @@ fun ListCharacter(
 ) {
     val result = handlePaggingResult(entries = entries)
     if (result) {
-        LazyColumn(contentPadding = PaddingValues(all = SMALL_PADDING)) {
+        LazyColumn(
+            contentPadding = PaddingValues(all = SMALL_PADDING),
+            verticalArrangement = Arrangement.spacedBy(
+                SMALL_PADDING
+            )
+        ) {
             items(items = entries,
                 key = { it.id }) { character ->
                 character?.let {
