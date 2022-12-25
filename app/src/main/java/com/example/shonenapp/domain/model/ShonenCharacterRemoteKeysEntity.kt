@@ -10,4 +10,5 @@ data class ShonenCharacterRemoteKeysEntity(
     val id:Long,
     val prevPage:Int?,
     val nextPage:Int?,
+    val lastUpdated:Long?=null
 )

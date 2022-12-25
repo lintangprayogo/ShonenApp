@@ -11,6 +11,8 @@ import com.example.shonenapp.domain.model.ShonenCharacterEntity
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.domain.model.ShonenCharacterRemoteKeysEntity
 import com.example.shonenapp.domain.model.ShonenCharacterRemoteKeysEntry
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -21,6 +23,20 @@ class ShonenCharacterRemoteMediator @Inject constructor(
 
     private val characterDao = shonenDataBase.characterDao()
     private val remoteKeyDao = shonenDataBase.remoteKeyDao()
+
+    override suspend fun initialize(): InitializeAction {
+        val curentTime = System.currentTimeMillis()
+        val lastUpdated = remoteKeyDao.getRemoteKey(1)?.lastUpdated ?: 0L
+        val cacheTimeOut = 5 * 60 * 24
+
+        val difMinutes = (curentTime - lastUpdated) / (60 * 1000)
+
+        return if (difMinutes > cacheTimeOut) {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        } else {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(
         loadType: LoadType,
@@ -63,7 +79,8 @@ class ShonenCharacterRemoteMediator @Inject constructor(
                         ShonenCharacterRemoteKeysEntity(
                             prevPage = prevPage,
                             nextPage = nextPage,
-                            id = data.id
+                            id = data.id,
+                            lastUpdated = respose.lastUpdated
                         )
                     }
 
@@ -79,7 +96,7 @@ class ShonenCharacterRemoteMediator @Inject constructor(
                             rating = data.rating,
                             related = data.related,
                             skillSet = data.skillSet,
-                            strength = data.strength
+                            strength = data.strength,
                         )
                     }
 
@@ -114,4 +131,10 @@ class ShonenCharacterRemoteMediator @Inject constructor(
                 remoteKeyDao.getRemoteKey(character.id)
             }
     }
+
+   /* private fun parseMilis(milis: Long): String {
+        val date = Date(milis)
+        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.ROOT)
+        return format.format(date)
+    }*/
 }

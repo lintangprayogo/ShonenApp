@@ -11,5 +11,5 @@ data class ApiResponse(
     val prevPage: Int? = null,
     val nextPage: Int? = null,
     val characters: List<ShonenCharacterResponse> = emptyList(),
-    val lastUpdated:String?=null
+    val lastUpdated:Long?=null
 )

@@ -25,8 +25,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkhttpClient() = OkHttpClient.Builder()
-        .connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(15, TimeUnit.SECONDS).build()
+        .connectTimeout(15, TimeUnit.MINUTES)
+        .readTimeout(15, TimeUnit.MINUTES).build()
 
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
