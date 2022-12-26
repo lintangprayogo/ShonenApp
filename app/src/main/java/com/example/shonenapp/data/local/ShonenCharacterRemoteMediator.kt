@@ -11,7 +11,6 @@ import com.example.shonenapp.domain.model.ShonenCharacterEntity
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.domain.model.ShonenCharacterRemoteKeysEntity
 import com.example.shonenapp.domain.model.ShonenCharacterRemoteKeysEntry
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
