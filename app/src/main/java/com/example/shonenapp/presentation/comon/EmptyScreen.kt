@@ -73,7 +73,7 @@ fun EmptyContent(
                 .alpha(alphaAnim)
                 .size(NETWORK_ERROR_ICON_HEIGHT),
             painter = painterResource(id = icon),
-            contentDescription = stringResource(R.string.NetworkErroIcon),
+            contentDescription = stringResource(R.string.network_error_icon),
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray
         )
 
