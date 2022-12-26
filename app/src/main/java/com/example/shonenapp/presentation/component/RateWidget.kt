@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.shonenapp.R
+import com.example.shonenapp.ui.theme.StarColor
 import com.example.shonenapp.utils.Constant.EMPTY_STAR
 import com.example.shonenapp.utils.Constant.FILLED_STAR
 import com.example.shonenapp.utils.Constant.HALF_STAR
@@ -40,7 +41,7 @@ fun FilledStar(
             translate(left = left, top = top) {
                 drawPath(
                     path = starPath,
-                    color = Color.Yellow
+                    color = StarColor
                 )
             }
         }
@@ -67,7 +68,7 @@ fun HalfFilledStar(
                 )
                 clipPath(starPath) {
                     drawRect(
-                        color = Color.Yellow, size = Size(
+                        color = StarColor, size = Size(
                             width = starPathBound.width / 1.7f,
                             height = starPathBound.height * scaleFactor,
                         )
@@ -118,12 +119,16 @@ fun calculateRating(rating: Double): Map<String, Int> {
         if (firstNumber in 0..5 && lastnumber in 0..9) {
             filledStars = firstNumber
 
-            if (lastnumber in 1..5) {
-                halfStars++
-            } else if (lastnumber in 6..9) {
-                filledStars++
-            } else {
-                halfStars = 0
+            when (lastnumber) {
+                in 1..5 -> {
+                    halfStars++
+                }
+                in 6..9 -> {
+                    filledStars++
+                }
+                else -> {
+                    halfStars = 0
+                }
             }
 
             if (firstNumber == 5 && lastnumber > 0) {

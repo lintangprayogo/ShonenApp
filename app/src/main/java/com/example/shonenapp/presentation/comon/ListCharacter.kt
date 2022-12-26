@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.component
+package com.example.shonenapp.presentation.comon
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.clickable
@@ -33,6 +33,8 @@ import com.example.borutoapp.ui.theme.SMALL_PADDING
 import com.example.shonenapp.R
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.navigation.Screen
+import com.example.shonenapp.presentation.component.RatingWidget
+import com.example.shonenapp.presentation.component.ShimmerEffect
 import com.example.shonenapp.ui.theme.topAppBarContentColor
 import com.example.shonenapp.utils.Constant.BASE_URL
 
@@ -80,7 +82,9 @@ fun handlePaggingResult(entries: LazyPagingItems<ShonenCharacterEntry>): Boolean
                 ShimmerEffect()
                 false
             }
-            error != null -> false
+            error != null -> {
+                EmptyScreen(error = error)
+                false}
             else -> true
         }
     }

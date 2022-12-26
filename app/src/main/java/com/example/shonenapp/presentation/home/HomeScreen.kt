@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.shonenapp.presentation.component.ListCharacter
+import com.example.shonenapp.presentation.comon.ListCharacter
 
 @Composable
 fun HomeScreen(
