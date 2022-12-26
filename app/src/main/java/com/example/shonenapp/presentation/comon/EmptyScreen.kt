@@ -24,12 +24,13 @@ import com.example.borutoapp.ui.theme.SMALL_PADDING
 import com.example.shonenapp.R
 import com.example.shonenapp.ui.theme.DarkGray
 import com.example.shonenapp.ui.theme.LightGray
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(error: LoadState.Error) {
     val message by remember {
-        mutableStateOf(parseError(error.toString()))
+        mutableStateOf(parseErrorMessage(error))
     }
 
     val icon by remember {
@@ -91,15 +92,15 @@ fun EmptyContent(
     }
 }
 
-fun parseError(message: String): String {
-    return when {
-        message.contains("SocketTimeoutException", true) -> {
+fun parseErrorMessage(state: LoadState.Error): String {
+    return when (state.error) {
+        is SocketTimeoutException -> {
             "Server Unvailable."
         }
-        message.contains("ConnectException", true) -> {
+        is ConnectException -> {
             "Internet Unvailable."
         }
-        else -> "Unknown Error."
+        else -> state.error.message?:"Unknown Error."
     }
 }
 
