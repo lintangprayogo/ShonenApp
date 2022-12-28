@@ -1,4 +1,4 @@
-package com.example.shonenapp.data.local
+package com.example.shonenapp.data.paging_source
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType

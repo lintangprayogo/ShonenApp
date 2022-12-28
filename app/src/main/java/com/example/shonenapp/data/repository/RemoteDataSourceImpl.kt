@@ -4,7 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.shonenapp.data.local.ShonenCharacterRemoteMediator
+import com.example.shonenapp.data.paging_source.ShonenCharacterRemoteMediator
 import com.example.shonenapp.data.local.dao.ShonenDataBase
 import com.example.shonenapp.data.remote.ShonenApiService
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
