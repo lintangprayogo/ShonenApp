@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.shonenapp.navigation.Screen
 import com.example.shonenapp.presentation.comon.ListCharacter
 
 @Composable
@@ -15,9 +16,9 @@ fun HomeScreen(
     val allCharacter = homeViewModel.getAllCharacter.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
-            HomeTopBar {
-
-            }
+            HomeTopBar (onSearchClicked = {
+                navHostController.navigate(Screen.SearchScreen.route)
+            })
         },
     ) {
         ListCharacter(allCharacter, navHostController = navHostController)

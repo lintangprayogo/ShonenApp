@@ -19,8 +19,10 @@ fun HomeTopBar(onSearchClicked: () -> Unit) {
         backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor,
         actions = {
             IconButton(onClick = onSearchClicked) {
-                Icon(imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(R.string.icon_search))
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = stringResource(R.string.icon_search)
+                )
             }
         })
 }

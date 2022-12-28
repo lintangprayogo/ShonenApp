@@ -8,7 +8,7 @@ sealed class Screen(val route: String) {
     object Home : Screen("home_screen")
     object Details : Screen("details_screen/${DETAIL_ID}/") {
         fun passId(id:Long): String {
-            return "$route$id"
+            return "details_screen/$id/"
         }
     }
 
