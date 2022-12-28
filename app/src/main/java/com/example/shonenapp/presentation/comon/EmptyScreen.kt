@@ -28,13 +28,18 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun EmptyScreen(error: LoadState.Error) {
-    val message by remember {
-        mutableStateOf(parseErrorMessage(error))
+fun EmptyScreen(error: LoadState.Error? = null) {
+    var message by remember {
+        mutableStateOf("Find Your Favorite Character")
     }
 
-    val icon by remember {
-        mutableStateOf(R.drawable.ic_network_error)
+    var icon by remember {
+        mutableStateOf(R.drawable.ic_search_document)
+    }
+
+    if (error != null) {
+        message = parseErrorMessage(error)
+        icon = R.drawable.ic_network_error
     }
 
     var startAnimation by remember {
@@ -100,7 +105,7 @@ fun parseErrorMessage(state: LoadState.Error): String {
         is ConnectException -> {
             "Internet Unvailable."
         }
-        else -> state.error.message?:"Unknown Error."
+        else -> state.error.message ?: "Unknown Error."
     }
 }
 

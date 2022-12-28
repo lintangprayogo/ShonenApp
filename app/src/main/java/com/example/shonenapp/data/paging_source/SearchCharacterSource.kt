@@ -4,9 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.shonenapp.data.remote.ShonenApiService
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
-import javax.inject.Inject
 
-class SearchCharacterSource @Inject constructor(
+class SearchCharacterSource(
     private val apiService: ShonenApiService,
     val query: String
 ) : PagingSource<Int, ShonenCharacterEntry>() {
@@ -17,7 +16,7 @@ class SearchCharacterSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ShonenCharacterEntry> {
         return try {
-            val response = apiService.searchShonenCharacters(page = 1, name = query)
+            val response = apiService.searchShonenCharacters( name = query)
             val data = response.characters.map {
                 ShonenCharacterEntry(
                     id = it.id,

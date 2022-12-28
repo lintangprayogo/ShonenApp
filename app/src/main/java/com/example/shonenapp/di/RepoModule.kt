@@ -8,6 +8,7 @@ import com.example.shonenapp.domain.respository.DataStoreOperation
 import com.example.shonenapp.domain.use_case.UseCases
 import com.example.shonenapp.domain.use_case.get_onboarding_use_case.GetOnboardingUseCase
 import com.example.shonenapp.domain.use_case.save_onboarding_use_case.SaveOnboardingUseCase
+import com.example.shonenapp.domain.use_case.search_character_use_case.SearchCharacterUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +32,8 @@ object RepoModule {
         return UseCases(
             getOnboardingUseCase = GetOnboardingUseCase(repository = repository),
             saveOnboardingUseCase = SaveOnboardingUseCase(repository = repository),
-            getAllCharacterUseCase = GetAllCharacterUseCase(repository = repository)
+            getAllCharacterUseCase = GetAllCharacterUseCase(repository = repository),
+            searchCharacterUseCase = SearchCharacterUseCase(repository = repository)
         )
     }
 }

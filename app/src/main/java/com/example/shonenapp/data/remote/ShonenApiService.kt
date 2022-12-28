@@ -9,6 +9,6 @@ interface ShonenApiService {
     suspend fun getAllShonenCharacters(@Query("page") page:Int): ApiResponse
 
     @GET("/search-characters")
-    suspend fun searchShonenCharacters(@Query("page") page:Int,@Query("name") name:String) : ApiResponse
+    suspend fun searchShonenCharacters(@Query("name") name: String) : ApiResponse
 
 }
