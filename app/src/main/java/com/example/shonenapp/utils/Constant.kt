@@ -12,4 +12,5 @@ object Constant {
     const val FILLED_STAR = "FILLED_STAR"
     const val EMPTY_STAR = "EMPTY_STAR"
     const val HALF_STAR = "HALF_STAR"
+    const val ABOUT_TEXT_MAX_LINE = 7
 }

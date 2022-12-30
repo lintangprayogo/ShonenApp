@@ -1,6 +1,5 @@
 package com.example.shonenapp.presentation.screen.detail
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,6 +12,6 @@ fun DetailScreen(
 ) {
     val selectedCharacter by detailViewModel.selectedCharacter
     selectedCharacter?.let {
-        Text(text = it.name)
+      DetailContent(navHostController = navHostController, shonenCharacterEntry = it)
     }
 }

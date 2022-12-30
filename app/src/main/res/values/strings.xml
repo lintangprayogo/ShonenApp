@@ -7,4 +7,12 @@
     <string name="search_icon">SearchIcon</string>
     <string name="search_here">Search Here…</string>
     <string name="close_icon">CloseIcon</string>
+    <string name="app_logo">app_logo</string>
+    <string name="strength">Strength</string>
+    <string name="month">Month</string>
+    <string name="birthday">Birthday</string>
+    <string name="about">About</string>
+    <string name="skils">Skills</string>
+    <string name="relative">Relative</string>
+    <string name="elements">Elements</string>
 </resources>
