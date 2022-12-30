@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.welcome
+package com.example.shonenapp.presentation.screen.welcome
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -79,11 +79,12 @@ fun WelcomeScreen(
 
 @Composable
 fun WelcomeContent(onBoardingPage: OnBoardingPage) {
-    Column(Modifier
-        .fillMaxWidth()
-        .background(
-            color = MaterialTheme.colors.welcomeScreenBackgroundColor
-        ),
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(
+                color = MaterialTheme.colors.welcomeScreenBackgroundColor
+            ),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -120,9 +121,10 @@ fun WelcomeContent(onBoardingPage: OnBoardingPage) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun FinishButton(modifier: Modifier, pagerState: PagerState, onClick: () -> Unit) {
-    Row(modifier
-        .padding(horizontal = EXTRA_LARGE_PADDING)
-        .fillMaxWidth(),
+    Row(
+        modifier
+            .padding(horizontal = EXTRA_LARGE_PADDING)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Center
     ) {

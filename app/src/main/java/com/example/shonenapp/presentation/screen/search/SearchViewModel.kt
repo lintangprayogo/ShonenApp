@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.search
+package com.example.shonenapp.presentation.screen.search
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

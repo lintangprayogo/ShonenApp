@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.home
+package com.example.shonenapp.presentation.screen.home
 
 import androidx.lifecycle.ViewModel
 import com.example.shonenapp.domain.use_case.UseCases

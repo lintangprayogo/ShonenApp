@@ -7,10 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.shonenapp.navigation.Screen.*
-import com.example.shonenapp.presentation.home.HomeScreen
-import com.example.shonenapp.presentation.search.SearchScreen
-import com.example.shonenapp.presentation.splash.ShonenSplashScreen
-import com.example.shonenapp.presentation.welcome.WelcomeScreen
+import com.example.shonenapp.presentation.screen.detail.DetailScreen
+import com.example.shonenapp.presentation.screen.home.HomeScreen
+import com.example.shonenapp.presentation.screen.search.SearchScreen
+import com.example.shonenapp.presentation.screen.splash.ShonenSplashScreen
+import com.example.shonenapp.presentation.screen.welcome.WelcomeScreen
 import com.example.shonenapp.utils.Constant.DETAIL_ID
 
 @Composable
@@ -25,11 +26,13 @@ fun SetupNavGraph(navHostController: NavHostController) {
         composable(Home.route) {
             HomeScreen(navHostController)
         }
-        composable(Details.route,
+        composable(
+            Details.route,
             arguments = listOf(navArgument(DETAIL_ID) {
-            type = NavType.LongType
-        })) {
-
+                type = NavType.LongType
+            })
+        ) {
+            DetailScreen(navHostController = navHostController)
         }
         composable(SearchScreen.route) {
             SearchScreen(navHostController = navHostController)

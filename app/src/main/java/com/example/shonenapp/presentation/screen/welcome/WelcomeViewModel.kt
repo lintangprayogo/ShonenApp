@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.welcome
+package com.example.shonenapp.presentation.screen.welcome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

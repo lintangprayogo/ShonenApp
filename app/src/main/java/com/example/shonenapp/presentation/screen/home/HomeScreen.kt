@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.home
+package com.example.shonenapp.presentation.screen.home
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable

@@ -1,4 +1,4 @@
-package com.example.shonenapp.presentation.splash
+package com.example.shonenapp.presentation.screen.splash
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
