@@ -5,6 +5,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -19,16 +21,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.example.borutoapp.ui.theme.NETWORK_ERROR_ICON_HEIGHT
 import com.example.borutoapp.ui.theme.SMALL_PADDING
 import com.example.shonenapp.R
+import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.ui.theme.DarkGray
 import com.example.shonenapp.ui.theme.LightGray
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null) {
+fun EmptyScreen(
+    error: LoadState.Error? = null,
+    entries: LazyPagingItems<ShonenCharacterEntry>? = null,
+) {
     var message by remember {
         mutableStateOf("Find Your Favorite Character")
     }
@@ -57,7 +66,9 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     EmptyContent(
         alphaAnim = alphaAnim,
         icon = icon,
-        message = message
+        message = message,
+        error = error,
+        entries = entries
     )
 }
 
@@ -65,35 +76,50 @@ fun EmptyScreen(error: LoadState.Error? = null) {
 fun EmptyContent(
     alphaAnim: Float,
     icon: Int,
-    message: String
+    message: String,
+    entries: LazyPagingItems<ShonenCharacterEntry>? = null,
+    error: LoadState.Error? = null
 ) {
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(
+    var isRefreshing by remember {
+        mutableStateOf(false)
+    }
+    SwipeRefresh(
+        swipeEnabled = error != null,
+        state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+        onRefresh = {
+            isRefreshing = true
+            entries?.refresh()
+            isRefreshing = false
+        }) {
+        Column(
             modifier = Modifier
-                .alpha(alphaAnim)
-                .size(NETWORK_ERROR_ICON_HEIGHT),
-            painter = painterResource(id = icon),
-            contentDescription = stringResource(R.string.network_error_icon),
-            tint = if (isSystemInDarkTheme()) LightGray else DarkGray
-        )
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                modifier = Modifier
+                    .alpha(alphaAnim)
+                    .size(NETWORK_ERROR_ICON_HEIGHT),
+                painter = painterResource(id = icon),
+                contentDescription = stringResource(R.string.network_error_icon),
+                tint = if (isSystemInDarkTheme()) LightGray else DarkGray
+            )
 
-        Text(
-            modifier = Modifier
-                .alpha(alphaAnim)
-                .padding(top = SMALL_PADDING),
-            text = message,
-            style = MaterialTheme.typography.subtitle1
-                .copy(
-                    color = if (isSystemInDarkTheme()) LightGray else DarkGray,
-                    fontWeight = FontWeight.Medium
-                ),
-            textAlign = TextAlign.Center
-        )
+            Text(
+                modifier = Modifier
+                    .alpha(alphaAnim)
+                    .padding(top = SMALL_PADDING),
+                text = message,
+                style = MaterialTheme.typography.subtitle1
+                    .copy(
+                        color = if (isSystemInDarkTheme()) LightGray else DarkGray,
+                        fontWeight = FontWeight.Medium
+                    ),
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 

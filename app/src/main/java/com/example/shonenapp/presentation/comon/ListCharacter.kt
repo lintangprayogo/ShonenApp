@@ -83,7 +83,7 @@ fun handlePaggingResult(entries: LazyPagingItems<ShonenCharacterEntry>): Boolean
                 false
             }
             error != null -> {
-                EmptyScreen(error = error)
+                EmptyScreen(error = error,entries)
                 false
             }
             entries.itemCount < 1 -> {
