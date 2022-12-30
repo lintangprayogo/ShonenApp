@@ -15,7 +15,7 @@ interface CharacterDao {
     fun getAllCharacter(): PagingSource<Int, ShonenCharacterEntry>
 
     @Query("SELECT * FROM ShonenCharacter where id=:id")
-    suspend fun getCharacterById(id: Long): ShonenCharacterEntry
+    suspend fun getSelectedCharacter(id: Long): ShonenCharacterEntry
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllCharacter(list: List<ShonenCharacterEntity>)

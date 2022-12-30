@@ -1,4 +1,4 @@
-package com.example.shonenapp.domain.get_all_character_use_case
+package com.example.shonenapp.domain.use_case.get_all_character_use_case
 
 import androidx.paging.PagingData
 import com.example.shonenapp.data.repository.Repository

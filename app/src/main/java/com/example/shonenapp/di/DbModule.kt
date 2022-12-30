@@ -3,6 +3,8 @@ package com.example.shonenapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.shonenapp.data.local.dao.ShonenDataBase
+import com.example.shonenapp.data.repository.LocalDataSourceImpl
+import com.example.shonenapp.domain.respository.LocalDataSource
 import com.example.shonenapp.utils.Constant.SHONEN_CHARACTER_DB
 import dagger.Module
 import dagger.Provides
@@ -20,5 +22,10 @@ object DbModule {
     fun provideDb(@ApplicationContext context: Context): ShonenDataBase =
         Room.databaseBuilder(context, ShonenDataBase::class.java, SHONEN_CHARACTER_DB)
             .build()
+
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(shonenDataBase: ShonenDataBase):LocalDataSource = LocalDataSourceImpl(shonenDataBase)
 
 }

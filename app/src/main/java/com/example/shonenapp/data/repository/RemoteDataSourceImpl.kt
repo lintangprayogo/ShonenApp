@@ -18,9 +18,11 @@ class RemoteDataSourceImpl(
     private val shonenDataBase: ShonenDataBase
 ) : RemoteDataSource {
 
+    private val characterDao = shonenDataBase.characterDao()
+
     @OptIn(ExperimentalPagingApi::class)
     override fun getAllCharacter(): Flow<PagingData<ShonenCharacterEntry>> {
-        val pagingSourceFactory = { shonenDataBase.characterDao().getAllCharacter() }
+        val pagingSourceFactory = { characterDao.getAllCharacter() }
         return Pager(
             config = PagingConfig(pageSize = ITEM_PER_PAGE),
             remoteMediator = ShonenCharacterRemoteMediator(
