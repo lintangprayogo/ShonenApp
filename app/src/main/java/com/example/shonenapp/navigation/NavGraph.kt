@@ -25,8 +25,9 @@ fun SetupNavGraph(navHostController: NavHostController) {
         composable(Home.route) {
             HomeScreen(navHostController)
         }
-        composable(Details.route, arguments = listOf(navArgument(DETAIL_ID) {
-            type = NavType.IntType
+        composable(Details.route,
+            arguments = listOf(navArgument(DETAIL_ID) {
+            type = NavType.LongType
         })) {
 
         }
