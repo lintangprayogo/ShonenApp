@@ -3,6 +3,7 @@ package com.example.shonenapp.presentation.screen.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.BottomSheetValue.Collapsed
 import androidx.compose.material.BottomSheetValue.Expanded
@@ -22,10 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.borutoapp.ui.theme.INFO_ICON_SIZE
-import com.example.borutoapp.ui.theme.LARGE_PADDING
-import com.example.borutoapp.ui.theme.MEDIUM_PADDING
-import com.example.borutoapp.ui.theme.MIN_SHEET_HEIGHT
+import com.example.borutoapp.ui.theme.*
 import com.example.shonenapp.R
 import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.ui.theme.titleColor
@@ -44,7 +42,16 @@ fun DetailContent(
     )
     val currentFraction = scaffoldState.currenSheetFraction
 
+    val radiusAnim = if (currentFraction == 1f)
+        EXTRA_LARGE_PADDING
+    else
+        EXPANDED_RADIUS_LEVEL
+
     BottomSheetScaffold(
+        sheetShape =
+        RoundedCornerShape(
+            topStart = radiusAnim, topEnd = radiusAnim
+        ),
         scaffoldState = scaffoldState,
         sheetPeekHeight = MIN_SHEET_HEIGHT,
         sheetContent = {
