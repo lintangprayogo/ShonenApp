@@ -2,6 +2,7 @@ package com.example.shonenapp.presentation.screen.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.material.BottomSheetValue.Collapsed
 import androidx.compose.material.BottomSheetValue.Expanded
@@ -159,27 +160,35 @@ fun BottomSheetContent(
             maxLines = ABOUT_TEXT_MAX_LINE
         )
 
-        Row(
+        LazyRow(
             modifier = Modifier
                 .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            OrderedList(
-                title = stringResource(R.string.relative),
-                items = shonenCharacterEntry.related,
-                textColor = contentColor
-            )
-            OrderedList(
-                title = stringResource(R.string.skils),
-                items = shonenCharacterEntry.skillSet,
-                textColor = contentColor
-            )
-            OrderedList(
-                title = stringResource(R.string.elements),
-                items = shonenCharacterEntry.elements,
-                textColor = contentColor
-            )
+            item {
+                OrderedList(
+                    title = stringResource(R.string.relative),
+                    items = shonenCharacterEntry.related,
+                    textColor = contentColor
+                )
+            }
+            item {
+                OrderedList(
+                    title = stringResource(R.string.skils),
+                    items = shonenCharacterEntry.skillSet,
+                    textColor = contentColor
+                )
+            }
+            item {
+                OrderedList(
+                    title = stringResource(R.string.elements),
+                    items = shonenCharacterEntry.elements,
+                    textColor = contentColor
+                )
+            }
+
+
         }
     }
 }
