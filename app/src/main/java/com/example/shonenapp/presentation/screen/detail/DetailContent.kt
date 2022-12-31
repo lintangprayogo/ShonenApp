@@ -114,7 +114,7 @@ fun BottomSheetContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = MEDIUM_PADDING),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             InfoxBox(
