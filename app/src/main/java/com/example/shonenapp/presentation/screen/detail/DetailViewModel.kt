@@ -10,6 +10,9 @@ import com.example.shonenapp.domain.use_case.UseCases
 import com.example.shonenapp.utils.Constant.DETAIL_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,4 +41,25 @@ class DetailViewModel @Inject constructor(
             }
         }
     }
+
+    //Karena Hanya inging mengambil data sekali makanya memakai shared Flow
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
+
+    private val _colorPallate = mutableStateOf<Map<String, String>>(mapOf())
+    val colorPallate: State<Map<String, String>> = _colorPallate
+
+    fun generateColorPallate() {
+        viewModelScope.launch {
+            _uiEvent.emit(UiEvent.GenerateColorPallater)
+        }
+    }
+
+    fun setCollorPallete(colors: Map<String, String>) {
+        _colorPallate.value = colors
+    }
+}
+
+sealed class UiEvent {
+    object GenerateColorPallater : UiEvent()
 }

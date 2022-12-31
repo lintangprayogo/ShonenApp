@@ -1,5 +1,6 @@
 package com.example.shonenapp.presentation.screen.detail
 
+import android.graphics.Color.parseColor
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -9,7 +10,7 @@ import androidx.compose.material.BottomSheetValue.Collapsed
 import androidx.compose.material.BottomSheetValue.Expanded
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -29,13 +30,29 @@ import com.example.shonenapp.domain.model.ShonenCharacterEntry
 import com.example.shonenapp.ui.theme.titleColor
 import com.example.shonenapp.utils.Constant
 import com.example.shonenapp.utils.Constant.ABOUT_TEXT_MAX_LINE
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailContent(
     navHostController: NavHostController,
-    shonenCharacterEntry: ShonenCharacterEntry
+    shonenCharacterEntry: ShonenCharacterEntry,
+    colors: Map<String, String>
 ) {
+    var vibrant by remember { mutableStateOf("#000000") }
+    var darkvibrant by remember { mutableStateOf("#000000") }
+    var onDarkVibrant by remember { mutableStateOf("#ffffff") }
+
+    LaunchedEffect(key1 = shonenCharacterEntry) {
+        vibrant = colors["vibrant"]!!
+        darkvibrant = colors["darkVibrant"]!!
+        onDarkVibrant = colors["onDarkVibrant"]!!
+    }
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = Color(parseColor(darkvibrant))
+    )
 
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(initialValue = Expanded)
@@ -55,12 +72,18 @@ fun DetailContent(
         scaffoldState = scaffoldState,
         sheetPeekHeight = MIN_SHEET_HEIGHT,
         sheetContent = {
-            BottomSheetContent(shonenCharacterEntry = shonenCharacterEntry)
+            BottomSheetContent(
+                shonenCharacterEntry = shonenCharacterEntry,
+                infoBoxIconColor = Color(parseColor(vibrant)),
+                sheetBackgroundColor = Color(parseColor(darkvibrant)),
+                contentColor = Color(parseColor(onDarkVibrant)),
+            )
         }, content = {
             BackgorundContent(
                 image = shonenCharacterEntry.image,
                 name = shonenCharacterEntry.name,
-                imageFraction = currentFraction
+                imageFraction = currentFraction,
+                backgroundColor = Color(parseColor(darkvibrant))
             ) {
                 navHostController.popBackStack()
             }
@@ -217,7 +240,7 @@ fun BackgorundContent(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = imageFraction + 0.4f)
+                .fillMaxHeight(fraction = imageFraction + 0.5f)
                 .align(Alignment.TopStart),
             model = ImageRequest
                 .Builder(LocalContext.current)
