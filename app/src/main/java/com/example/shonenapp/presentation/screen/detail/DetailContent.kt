@@ -3,6 +3,8 @@ package com.example.shonenapp.presentation.screen.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.BottomSheetValue.Collapsed
+import androidx.compose.material.BottomSheetValue.Expanded
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
@@ -37,8 +39,9 @@ fun DetailContent(
 ) {
 
     val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
+        bottomSheetState = rememberBottomSheetState(initialValue = Expanded)
     )
+    val currentFraction = scaffoldState.currenSheetFraction
 
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -48,12 +51,29 @@ fun DetailContent(
         }, content = {
             BackgorundContent(
                 image = shonenCharacterEntry.image,
-                name = shonenCharacterEntry.name
+                name = shonenCharacterEntry.name,
+                imageFraction = currentFraction
             ) {
                 navHostController.popBackStack()
             }
         })
 }
+
+@OptIn(ExperimentalMaterialApi::class)
+val BottomSheetScaffoldState.currenSheetFraction: Float
+    get() {
+        val fraction = bottomSheetState.progress.fraction
+        val targetValue = bottomSheetState.targetValue
+        val currentValue = bottomSheetState.currentValue
+
+        return when {
+            currentValue == Collapsed && targetValue == Collapsed -> 1f
+            currentValue == Expanded && targetValue == Expanded -> 0f
+            currentValue == Collapsed && targetValue == Expanded -> 1f - fraction
+            currentValue == Expanded && targetValue == Collapsed -> 0f + fraction
+            else -> fraction
+        }
+    }
 
 @Composable
 fun BottomSheetContent(
@@ -181,7 +201,7 @@ fun BackgorundContent(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = imageFraction)
+                .fillMaxHeight(fraction = imageFraction + 0.4f)
                 .align(Alignment.TopStart),
             model = ImageRequest
                 .Builder(LocalContext.current)
