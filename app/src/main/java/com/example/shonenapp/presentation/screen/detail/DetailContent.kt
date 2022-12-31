@@ -128,24 +128,24 @@ fun BottomSheetContent(
             InfoxBox(
                 icon = painterResource(id = R.drawable.ic_sword),
                 iconColor = infoBoxIconColor,
-                titleText = stringResource(R.string.strength),
-                desText = shonenCharacterEntry.strength.toString(),
+                titleText = shonenCharacterEntry.strength.toString(),
+                desText = stringResource(R.string.strength),
                 textColor = contentColor
             )
 
             InfoxBox(
                 icon = painterResource(id = R.drawable.ic_calendar),
                 iconColor = infoBoxIconColor,
-                titleText = stringResource(R.string.month),
-                desText = shonenCharacterEntry.month,
+                titleText = shonenCharacterEntry.month,
+                desText = stringResource(R.string.month),
                 textColor = contentColor
             )
 
             InfoxBox(
                 icon = painterResource(id = R.drawable.ic_cake),
                 iconColor = infoBoxIconColor,
-                titleText = stringResource(R.string.birthday),
-                desText = shonenCharacterEntry.day,
+                titleText = shonenCharacterEntry.day,
+                desText = stringResource(R.string.birthday),
                 textColor = contentColor
             )
         }
