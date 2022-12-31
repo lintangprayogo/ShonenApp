@@ -111,6 +111,7 @@ fun CharacterItem(character: ShonenCharacterEntry, navHostController: NavHostCon
                 model = ImageRequest.Builder(LocalContext.current)
                     .data("$BASE_URL${character.image}")
                     .crossfade(true)
+                    .error(R.drawable.ic_placeholder)
                     .build(),
                 placeholder = painterResource(R.drawable.ic_placeholder),
                 contentDescription = character.name,
