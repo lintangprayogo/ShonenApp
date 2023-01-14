@@ -5,7 +5,7 @@ import com.example.shonenapp.domain.model.ApiResponse
 
 class FakeShonenApi : ShonenApiService {
 
-    private val characters = listOf(
+     private val characters = listOf(
         ShonenCharacterResponse(
             id = 1,
             name = "Rengoku",
@@ -108,7 +108,7 @@ class FakeShonenApi : ShonenApiService {
     private fun findCharacters(name: String): List<ShonenCharacterResponse> {
         return if (name.isNotEmpty()) {
             return characters.filter { character ->
-                character.name.contains(name, false)
+                character.name.contains(name, true)
             }
         } else {
             emptyList()
