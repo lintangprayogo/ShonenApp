@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalPagingApi::class)
+
 package com.example.shonenapp.data.paging_source
 
 import androidx.paging.*
@@ -28,7 +30,6 @@ class ShonenCharacterRemoteMediatorTest {
         shonenDataBase.clearAllTables()
     }
 
-    @OptIn(ExperimentalPagingApi::class)
     @Test
     fun refreshloadReturnSuccessWhenMoreDataPresent() {
         runBlocking {
@@ -51,7 +52,6 @@ class ShonenCharacterRemoteMediatorTest {
         }
     }
 
-    @OptIn(ExperimentalPagingApi::class)
     @Test
     fun refreshLoadSuccessAndEndOfPaginationTrueWhenNoMoreData() {
         runBlocking {
@@ -74,7 +74,7 @@ class ShonenCharacterRemoteMediatorTest {
             assertTrue((result as MediatorResult.Success).endOfPaginationReached)
         }
     }
-    @OptIn(ExperimentalPagingApi::class)
+
     @Test
     fun refreshLoadWhenError() {
         runBlocking {
@@ -96,8 +96,6 @@ class ShonenCharacterRemoteMediatorTest {
             assertTrue(result is MediatorResult.Error)
         }
     }
-
-
 
 
 }
