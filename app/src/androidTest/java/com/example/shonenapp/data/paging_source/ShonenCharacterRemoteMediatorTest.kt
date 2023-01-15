@@ -31,7 +31,7 @@ class ShonenCharacterRemoteMediatorTest {
     }
 
     @Test
-    fun refreshloadReturnSuccessWhenMoreDataPresent() {
+    fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() {
         runBlocking {
             val remoteMediator = ShonenCharacterRemoteMediator(
                 shonenApiService = shonenApiService,
