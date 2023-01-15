@@ -120,7 +120,7 @@ class SearchHeroesSourceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `search api with existing character name , expect empty result`() = runTest {
-        val characterSource = SearchCharacterSource(apiService = shonenApi, query = "")
+        val characterSource = SearchCharacterSource(apiService = shonenApi, query ="Asuma")
 
         val loadResult =  characterSource.load(
             PagingSource.LoadParams.Refresh(
