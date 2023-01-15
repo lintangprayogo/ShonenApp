@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,12 +33,19 @@ fun SearchTopBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(TOP_APP_BAR_HEIGHT),
+            .height(TOP_APP_BAR_HEIGHT)
+            .semantics {
+                contentDescription = "SearchWidget"
+            },
         elevation = AppBarDefaults.TopAppBarElevation,
         color = MaterialTheme.colors.topAppBarBackgroundColor
     ) {
         TextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics {
+                    contentDescription = "TextField"
+                },
             value = text,
             onValueChange = onTextChanged,
             placeholder = {
@@ -50,7 +59,11 @@ fun SearchTopBar(
             singleLine = true,
             leadingIcon = {
                 IconButton(
-                    modifier = Modifier.alpha(ContentAlpha.medium),
+                    modifier = Modifier
+                        .alpha(ContentAlpha.medium)
+                        .semantics {
+                            contentDescription = "SearchButton"
+                        },
                     onClick = { }) {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -60,13 +73,17 @@ fun SearchTopBar(
                 }
             },
             trailingIcon = {
-                IconButton(onClick = {
-                    if (text.isNotEmpty()) {
-                        onTextChanged.invoke("")
-                    } else {
-                        onCloseClicked.invoke()
-                    }
-                }) {
+                IconButton(
+                    modifier = Modifier.semantics {
+                        contentDescription = "CloseButton"
+                    },
+                    onClick = {
+                        if (text.isNotEmpty()) {
+                            onTextChanged.invoke("")
+                        } else {
+                            onCloseClicked.invoke()
+                        }
+                    }) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = stringResource(R.string.close_icon),
